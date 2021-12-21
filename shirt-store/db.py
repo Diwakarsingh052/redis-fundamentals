@@ -2,7 +2,7 @@ import redis
 
 r = redis.Redis()
 
-product = [
+products = [
     {
         "color": "black",
         "price": 49.99,
@@ -30,23 +30,15 @@ product = [
 
 ]
 
-shirts = dict()
 id = 1
-for i in product:
-    key = f"shirt:{id}"
-    shirts[key] = i
-    id += 1
-
-print(shirts)
-
-r.flushdb()  # For Development Environment only
-
 pipe = r.pipeline()
 
-for s_id, shirt in shirts.items():
-    for field, value in shirt.items():
-        pipe.hset(s_id, field, value)
+for p in products:
+    key = f"shirt:{id}"
+    print(p)
+    for field, value in p.items():
+        pipe.hset(key, field, value)
+    id += 1
 
 pipe.execute()
-
 r.close()

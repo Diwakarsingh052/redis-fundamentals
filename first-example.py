@@ -1,6 +1,6 @@
 import redis
 
-r = redis.Redis()
+r = redis.Redis(username="default",password="hello")
 r.set("fname","Diwakar")
 name_bytes = r.get("fname")
 

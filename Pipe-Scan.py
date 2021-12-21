@@ -1,6 +1,6 @@
 import redis
 
-r = redis.Redis()
+r = redis.Redis(password="hello")
 r.flushdb()
 
 i = 1
