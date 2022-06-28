@@ -27,7 +27,7 @@ def buy_items(r: redis.Redis, itemid) -> None:
     while True:
         try:
             pipe.watch(itemid)
-            nleft: bytes = r.hget(itemid, "quantity")
+            nleft = r.hget(itemid, "quantity")
             if nleft > b"0":
                 pipe.multi()
                 time.sleep(7)
